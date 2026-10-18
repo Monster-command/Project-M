@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark-first design tokens. Light mode via [data-theme="light"]. */
+:root {
+  --bg: #0a0a0c;
+  --panel: #121215;
+  --panel2: #18181c;
+  --border: rgba(255, 255, 255, 0.09);
+  --ink: #f4f4f5;
+  --muted: #a3a3ad;
+  --faint: #6d6d78;
+  --accent: #ffffff;
+  --accent-dim: rgba(255, 255, 255, 0.14);
+  --accent-ink: #0a0a0c;
+  --up: #22c55e;
+  --down: #f0524f;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f7f7f8;
+  --panel: #ffffff;
+  --panel2: #f1f1f3;
+  --border: rgba(10, 10, 12, 0.1);
+  --ink: #131316;
+  --muted: #55555e;
+  --faint: #9a9aa3;
+  --accent: #0a0a0c;
+  --accent-dim: rgba(10, 10, 12, 0.08);
+  --accent-ink: #ffffff;
+  --up: #16a34a;
+  --down: #dc2626;
+  color-scheme: light;
+}
+
+:root {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+::selection { background: var(--accent-dim); }
+
+/* Brand mark: black-M artwork; inverted to white on the dark theme. */
+.brand-mark { filter: invert(1); }
+[data-theme="light"] .brand-mark { filter: none; }
+
+/* Slim scrollbars for dense tables */
+* { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+.animate-pulse-soft { animation: pulse-soft 1.6s ease-in-out infinite; }
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise-in { animation: rise-in 0.35s ease-out both; }
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
